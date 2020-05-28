@@ -200,10 +200,10 @@ def sendDM(userID, memberStats):
 
     # Send message to user
     payload = {"channel_id": dmID, "message": message}
-    #r = requests.post("https://cyberpwnies.com/api/v4/posts", headers=headers, json=payload)
-    r = "201"
-    #print(memberStats["name"] + "    HTTP Response Code : " + str(r.status_code))
-    print(memberStats["name"] + "    HTTP Response Code : " + r)
+    r = requests.post("https://cyberpwnies.com/api/v4/posts", headers=headers, json=payload)
+    print(memberStats["name"] + "    HTTP Response Code : " + str(r.status_code))
+    #r = "201"
+    #print(memberStats["name"] + "    HTTP Response Code : " + r)
 
 
 # Find which record from training report matches which user from mattermost
