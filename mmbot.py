@@ -122,22 +122,22 @@ def getPwnies():
 
 
 # Use openpyxl to get data from the training report
-def openTrainingDoc():
+def openTrainingDoc(docName):
     global wsHeaders
     global pwnieList
 
     try:  #TODO
-        wb = openpyxl.load_workbook("training.xlsx", data_only=True)
+        wb = openpyxl.load_workbook(docName, data_only=True)
     except:
-        print("\"training.xlsx\" not found")
-        return
+        print("Error opening " + docName)
+        exit()
 
     # Search for tab named "Squadron All".  If this changes often between reports, I can change this to always pull the first tab
     try:
         ws1 = wb["Squadron All"]
     except:
         print("Could not find worksheet labled \"Squadron All\"")
-        return
+        exit()
 
     # parse through column headers
     #    1) Make sure the trainings match with config.json
@@ -162,7 +162,7 @@ def openTrainingDoc():
             #    print("If this program is not finding the correct names, consider updating the training names in \"configs\" to match the training report")
     if fltColumn == -1 or nameColumn == -1:
         print("Could not find \"Flight\" column or \"Name\" column in \"Squadron All\" worksheet")
-        return
+        exit()
 
     # get all pwnies who are overdue or upcomming from training report
     count = 0
@@ -340,7 +340,7 @@ def main(argv):
 
     # Get list of users in C and Z flight from training report.  Stored in pwnieList
     # Get dictionary if trainings from training report.  Stored in wsHeaders
-    openTrainingDoc()
+    openTrainingDoc(argv[1])
 
     ready = input("\nReady to start sending reports? [y or n]").lower()
     while ready != 'y':
