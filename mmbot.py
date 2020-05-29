@@ -16,7 +16,7 @@ import os
 # When the ratio is closer to 0, the user will be asked to deconflict names that differ more
 # When the ratio is closer to 1, more names will be skipped and not double checked by user
 # If the program is skipping users, lower the ratio.  If the program is asking too often, increase the ratio
-userRatio = .66
+userRatio = .75
 # Ratio used when comparing training names from configs dictionary and training report
 # If you keep getting asked for this, consider changing the names in the "trainings" dictionary to match the training report
 trainingRatio = .66
@@ -118,7 +118,7 @@ def getPwnies():
         r = requests.get("https://cyberpwnies.com/api/v4/users", headers=headers, params=params)
         users += r.json()
 
-    print("Found " + str(len(users)) + " users")
+    print("Found " + str(len(users)) + " pwnies on mattermost")
 
 
 # Use openpyxl to get data from the training report
@@ -200,10 +200,9 @@ def sendDM(userID, memberStats):
 
     # Send message to user
     payload = {"channel_id": dmID, "message": message}
+    r.status_code = 201
     r = requests.post("https://cyberpwnies.com/api/v4/posts", headers=headers, json=payload)
     print(memberStats["name"] + "    HTTP Response Code : " + str(r.status_code))
-    #r = "201"
-    #print(memberStats["name"] + "    HTTP Response Code : " + r)
 
 
 # Find which record from training report matches which user from mattermost
