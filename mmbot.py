@@ -200,7 +200,7 @@ def sendDM(userID, memberStats):
 
     # Send message to user
     payload = {"channel_id": dmID, "message": message}
-    r.status_code = 201
+    r.status_code = 0
     r = requests.post("https://cyberpwnies.com/api/v4/posts", headers=headers, json=payload)
     print(memberStats["name"] + "    HTTP Response Code : " + str(r.status_code))
 
@@ -318,7 +318,8 @@ def printHelp(arg0):
         "Usage: python3 {name} TrainingReport.xlsx\n\n"
         "Requirements:\n"
         " - Training report must have \"Squadron All\" worksheet (tab)\n"
-        " - Worksheet must have \"Name\" and \"Flight\" columns\n\n"
+        " - Worksheet must have \"Name\" and \"Flight\" columns\n"
+        " - Worksheet names must be in the \"Last, First\" format\n\n"
         "Configuration changes can be made.  See first few lines of program\n".format(name=arg0))
 
 def main(argv):
