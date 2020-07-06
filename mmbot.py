@@ -168,7 +168,7 @@ def openTrainingDoc(docName):
     count = 0
     for row in ws1.iter_rows():
         # need first part to filter out records with empty columns
-        if row[fltColumn].value and (row[fltColumn].value.lower() == 'c' or row[fltColumn].value.lower() == 'z'):
+        if row[fltColumn].value and (row[fltColumn].value.lower() == 'c' or row[fltColumn].value.lower() == 'z' or row[fltColumn].value.lower() == 'ado'):
             count += 1
             pwnieList.append(row)
     print("Found " + str(count) + " Z and C flight members listed in training report")
